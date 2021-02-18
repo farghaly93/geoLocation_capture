@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Youtube</title>
+  
+  <script>
+    let locations;
+    fetch("/getLocations").then(res => res.json()).then(data => {
+      locations = data;
+      const locationsDiv = document.getElementById("locations");
+      let innerHtml = "";
+      let i = 1;
+      locations.forEach(loc => {
+        innerHtml += "<div class='user' onclick='getLocation("+(i-1)+")'> <div>user ("+i+")</div><div> "+new Date(loc.date).toString().split("GMT")[0]+"</div></div>";
+        i++;
+      });
+      locationsDiv.innerHTML = innerHtml;
+    });
+
+    function getLocation(i) {
+      console.log(locations[i]);
+      const lat = locations[i].lat;
+      const lng = locations[i].lng;
+      window.location.href = "/userLocation?lat=" + lat + "&lng=" + lng;
+    }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: rgba(238, 240, 240, 0.863);
+    }
+    .user {
+      margin: 20px;
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+<body>
+    <h1>Users locations</h1>
+    <div id="locations">
+
+    </div>
+</body>
+</html>

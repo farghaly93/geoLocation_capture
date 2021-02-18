@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Youtube</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  
+  <script>
+
+    let map;
+    function initMap() {
+      
+      const queryString = window.location.search;
+      const params = new URLSearchParams(queryString);
+      const lat = parseFloat(params.get("lat"));
+      const lng = parseFloat(params.get("lng"));
+      document.querySelector(".lat").querySelector(".val").innerHTML = lat;
+      document.querySelector(".long").querySelector(".val").innerHTML = lng;
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat, lng },
+        zoom: 8,
+      });
+    }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: rgba(238, 240, 240, 0.863);
+    }
+    h1 {
+      height: 10vh;
+      padding: 2rem auto;
+      text-align: center;
+      color: rgb(80, 80, 82);
+    }
+    #location {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      /* align-items: space-evenly; */
+      margin: 0 auto;
+      padding: 5rem 0;
+      width: 90%;
+      height: 30vh;
+      background: rgb(253, 253, 252);
+      border-bottom: 3px solid orangered;
+    }
+    #location > div{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      border-bottom: 2px solid rgba(85, 85, 85, 0.473);
+      margin: .6rem 5rem;
+    }
+    #location > div > h3 {
+      text-align: left;
+    }
+    #location > div > h3:first-child {
+      color: red;
+    }
+    #map {
+      height: 60vh;
+      width: 98vw;
+      margin: 0 auto;
+      background: rgb(83, 81, 81);
+    }
+  </style>
+
+</head>
+<body>
+    <h1>Farghaly geoLocation capture</h1>
+    <div id="location">
+      <div class="lat">
+        <h3>Latitude: </h3>
+        <h3 class="val"></h3>
+      </div>
+      <div class="long">
+        <h3>Longitude: </h3>
+        <h3 class="val"></h3>
+      </div>
+    </div>
+    <div id="map"></div>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwWMjnVT-0e4zHFhMDZHI_BbRMLjdNJeA&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+</body>
+</html>
